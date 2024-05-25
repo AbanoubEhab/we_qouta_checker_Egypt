@@ -90,8 +90,14 @@ for num in nums:
             )
 
             qoutaGB = qouta.text.split()[0]
-            print(str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB+ " GB ")
-            report = report + "\n" + str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB + " GB "
+                
+            if num[1][:3] == "015":
+                print(str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB+ " MB ")
+                report = report + "\n" + str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB + " MB "
+                
+            else:
+                print(str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB+ " GB ")
+                report = report + "\n" + str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB + " GB "
 
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
