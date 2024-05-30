@@ -5,15 +5,21 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from datetime import date
-import pywhatkit
 from pynput.keyboard import Key, Controller
-import mouse
 import random
+from urllib.parse import quote
 
-driver = webdriver.Firefox()
+profile_path = r'firefox_profile_Path'
 
-nums = [["line name","number","password"],
-        ["line name","number","password"]
+firefox_options = webdriver.FirefoxOptions()
+firefox_options.add_argument('-profile')
+firefox_options.add_argument(profile_path)
+
+driver = webdriver.Firefox(options=firefox_options)
+
+nums = [["line_name","Line_number","Password"],
+        ["line_name","Line_number","Password"],
+        
         ]
 
 report = ""
@@ -34,13 +40,13 @@ def logoutfun():
 
 #send whatsapp function
 def sendwhatsapp(phone):
-    pywhatkit.sendwhatmsg_instantly(phone,report,tab_close=True,close_time=15)
+    creport = quote(report)
+    driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ creport )
     sleep(15)
     sleep(round(random.uniform(0.2, 3), 2))
-    mouse.click('left')
-    sleep(round(random.uniform(0.2, 1.5), 2))
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
+    sleep(round(random.uniform(0.2, 3), 2))
 
 
 for num in nums:
@@ -66,15 +72,11 @@ for num in nums:
 
         try:
             #Check if qouta is empty
+            sleep(2)
             IsEmpty = WebDriverWait(driver, 7.5).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class='ant-modal-body']"))
             )
-            #pressing cancel
-            #cancel = WebDriverWait(driver, 7.5).until(
-            #EC.presence_of_element_located((By.XPATH, "//button[@class='ant-btn ant-btn-link ec_button_ant-btn-link_4Dr4uc']"))
-            #)
-            #cancel.click()
-            #reload page to remove the popup
+
             driver.get("https://my.te.eg/user/login")
             sleep(2)
             #Logout
@@ -90,7 +92,8 @@ for num in nums:
             )
 
             qoutaGB = qouta.text.split()[0]
-                
+            
+            #if the number is mobile qouta shows in MB instaed of GB
             if num[1][:3] == "015":
                 unit = " MB "
             else:
@@ -102,7 +105,7 @@ for num in nums:
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
 
-            sleep(1)
+            sleep(2)
             days = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[4]/div/span"))
             )
@@ -122,8 +125,6 @@ for num in nums:
         except:
             print("try recover")
 
-driver.quit()
-
 #Save Report as txt File
 new_var = date.today()
 file = open("Qouta " + str(new_var) + ".txt", 'w') 
@@ -131,5 +132,9 @@ file.write(report)
 file.close() 
 
 #send report on whatsapp
-sendwhatsapp("+2whatsapp number")
+ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]
 
+for mem in ITTeam:
+    sendwhatsapp(mem)
+
+driver.quit()
