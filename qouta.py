@@ -17,10 +17,15 @@ firefox_options.add_argument(profile_path)
 
 driver = webdriver.Firefox(options=firefox_options)
 
+#Numbers to cheak Qouta for [line name, number, password]
 nums = [["line_name","Line_number","Password"],
         ["line_name","Line_number","Password"],
         
         ]
+
+#whatsapp numbers to receive report
+ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]
+
 
 report = ""
 keyboard = Controller()
@@ -40,10 +45,8 @@ def logoutfun():
 
 #send whatsapp function
 def sendwhatsapp(phone):
-    creport = quote(report)
     driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ creport )
-    sleep(15)
-    sleep(round(random.uniform(0.2, 3), 2))
+    sleep(15 + round(random.uniform(0.2, 3), 2))
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
     sleep(round(random.uniform(0.2, 3), 2))
@@ -131,8 +134,11 @@ file = open("Qouta " + str(new_var) + ".txt", 'w')
 file.write(report) 
 file.close() 
 
+creport = quote(report)
+
 #send report on whatsapp
-ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]
+driver.get("https://web.whatsapp.com")
+sleep(20)
 
 for mem in ITTeam:
     sendwhatsapp(mem)
