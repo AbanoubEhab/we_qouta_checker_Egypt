@@ -47,8 +47,10 @@ def logoutfun():
 def sendwhatsapp(phone):
     driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ creport )
     sleep(15 + round(random.uniform(0.2, 3), 2))
-    keyboard.press(Key.enter)
-    keyboard.release(Key.enter)
+    send = WebDriverWait(driver, 7.5).until(
+       EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div"))
+    )
+    send.send_keys(Keys.RETURN)
     sleep(round(random.uniform(0.2, 3), 2))
 
 
