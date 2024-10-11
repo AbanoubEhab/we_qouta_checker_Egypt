@@ -9,7 +9,7 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
 - pip
 - git
 - firefox browser (you can use any browser if you install it's selenium web driver but firefox just works [webdriver](https://www.selenium.dev/documentation/webdriver/))
-
+### Installtion
 1. Make new folder and open git terminal inside it
 2. Download the script  ```git clone https://github.com/AbanoubEhab/we_qouta_checker_Egypt.git```
 3. open the repo folder by ```cd we_qouta_checker_Egypt```
