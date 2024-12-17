@@ -48,7 +48,7 @@ def sendwhatsapp(phone):
     driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ creport )
     sleep(14 + round(random.uniform(0.2, 3), 2))
     send = WebDriverWait(driver, 7.5).until(
-       EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div/div"))
+       EC.presence_of_element_located((By.XPATH, "/html/body"))
     )
     send.send_keys(Keys.RETURN)
     sleep( 2 + round(random.uniform(0.2, 3), 2))
