@@ -19,13 +19,15 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
      - if in Linux it will be inside ~/.mozilla/firefox/your_folder_name
      - if in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
      
-   - fill nums array with your data
-   ```
-     nums = [["line_name","Line_number","Password"],
-        ["line_name","Line_number","Password"],
-        
-        ]
-     ```
+   - Copy Numbers.csv.Example to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
+   
+    |           |             |          |
+    | --------- | ----------- | -------- |
+    | line_name | Line_number | Password |
+    | line 1    | 2123456     | Password |
+    | line 2    | 1234567     | password |
+    |           |             |          |
+     
    - fill the array ```ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]```
    with the numbers you want the script to send the report to
 6. run the script by python3 ./qouta.py

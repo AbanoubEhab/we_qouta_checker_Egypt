@@ -8,6 +8,7 @@ from datetime import date
 from pynput.keyboard import Key, Controller
 import random
 from urllib.parse import quote
+import csv
 
 profile_path = r'firefox_profile_Path'
 
@@ -18,10 +19,22 @@ firefox_options.add_argument(profile_path)
 driver = webdriver.Firefox(options=firefox_options)
 
 #Numbers to cheak Qouta for [line name, number, password]
-nums = [["line_name","Line_number","Password"],
-        ["line_name","Line_number","Password"],
-        
-        ]
+# Initialize an empty list (array)
+nums = []
+
+# Open the CSV file and read its contents
+with open('Numbers.csv', mode='r') as file:
+    csv_reader = csv.reader(file)
+    
+    # Skip the header row (optional)
+    next(csv_reader)
+    
+    # Iterate over each row and append it to the list
+    for row in csv_reader:
+        nums.append(row)
+
+# Print the filled array
+print(nums)
 
 #whatsapp numbers to receive report
 ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]
@@ -132,7 +145,7 @@ for num in nums:
 
 #Save Report as txt File
 new_var = date.today()
-file = open("Qouta " + str(new_var) + ".txt", 'w') 
+file = open(str(new_var)+ " Qouta" + ".txt", 'w') 
 file.write(report) 
 file.close() 
 
