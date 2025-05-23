@@ -10,7 +10,7 @@ import random
 from urllib.parse import quote
 import csv
 
-profile_path = r'firefox_profile_Path'
+profile_path = r'C:\Users\tech\AppData\Roaming\Mozilla\Firefox\Profiles\d5xx3vrh.tech'
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')
@@ -18,31 +18,24 @@ firefox_options.add_argument(profile_path)
 
 driver = webdriver.Firefox(options=firefox_options)
 
-#Numbers to cheak Qouta for [line name, number, password]
-# Initialize an empty list (array)
-nums = []
-
-# Open the CSV file and read its contents
-with open('Numbers.csv', mode='r') as file:
-    csv_reader = csv.reader(file)
-    
-    # Skip the header row (optional)
-    next(csv_reader)
-    
-    # Iterate over each row and append it to the list
-    for row in csv_reader:
-        nums.append(row)
-
-# Print the filled array
-print(nums)
-
-#whatsapp numbers to receive report
-ITTeam = ["number_to_send_whatsapp", "number_to_send_whatsapp", "number_to_send_whatsapp"]
-
-
 report = ""
 keyboard = Controller()
+#Creating Arrays to hold the data from CSVs
+nums = []
+ITTeam = []
 
+def read_csv(csv_file,data_Array):
+    
+    # Open the CSV file and read its contents
+    with open(csv_file, mode='r') as file:
+        csv_reader = csv.reader(file)
+        
+        # Skip the header row (optional)
+        next(csv_reader)
+        
+        # Iterate over each row and append it to the list
+        for row in csv_reader:
+            data_Array.append(row)
 
 #logout function
 def logoutfun():
@@ -66,6 +59,12 @@ def sendwhatsapp(phone):
     send.send_keys(Keys.RETURN)
     sleep( 2 + round(random.uniform(0.2, 3), 2))
 
+read_csv("Numbers.csv",nums)
+read_csv("Whatsapp.csv",ITTeam)
+
+# Print the filled arrays
+print(nums)
+print(ITTeam)
 
 for num in nums:
 
@@ -149,6 +148,7 @@ file = open(str(new_var)+ " Qouta" + ".txt", 'w')
 file.write(report) 
 file.close() 
 
+#reformat the report to be added to whatsapp link
 creport = quote(report)
 
 #send report on whatsapp
@@ -156,6 +156,6 @@ driver.get("https://web.whatsapp.com")
 sleep(20)
 
 for mem in ITTeam:
-    sendwhatsapp(mem)
+    sendwhatsapp(mem[0])
 
 driver.quit()
