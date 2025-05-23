@@ -6,11 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from datetime import date
 from pynput.keyboard import Key, Controller
-import random
 from urllib.parse import quote
-import csv
+from dotenv import load_dotenv, dotenv_values
+import random, os, csv
+ 
+load_dotenv('.env')
 
-profile_path = r'C:\Users\tech\AppData\Roaming\Mozilla\Firefox\Profiles\d5xx3vrh.tech'
+profile_path: str = os.getenv('profile_path')
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')

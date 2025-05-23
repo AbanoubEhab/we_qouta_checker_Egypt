@@ -22,7 +22,7 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
 
 5. open qouta.py 
    
-   - Replace "firefox_profile_Path" in line 12 with the path of your Firefox profile
+   - Create '.env' file using .env.Example and add "profile_Path" with the path of your Firefox profile
      
      - if in Linux it will be inside ~/.mozilla/firefox/your_folder_name
      - if in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
@@ -41,5 +41,7 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
       | +201234567890 |
       | +201198765432 |
       | +201512345678 |
+
+*Note : Make sure you logged in with whatsapp web before running the script
 
 6. run the script by ```python3 ./qouta.py```
