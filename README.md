@@ -22,9 +22,9 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
  
 5. Create '.env' file using .env.Example and add "profile_Path" with the path of your Firefox profile
   
-  - If in Linux it will be inside ~/.mozilla/firefox/your_folder_name
-  - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
-  - If You want to save the report as txt after finishing set savetxt to True
+    - If in Linux it will be inside ~/.mozilla/firefox/your_folder_name
+    - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
+    - If You want to save the report as txt after finishing set savetxt to True
    
 6. Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
   
