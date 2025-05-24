@@ -19,30 +19,28 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
 3. open the repo folder by ```cd we_qouta_checker_Egypt```
 
 4. Install required libraries ```pip install -r requirements.txt```
-
-5. Adding Your Data and configs
+ 
+5. Create '.env' file using .env.Example and add "profile_Path" with the path of your Firefox profile
+  
+  - If in Linux it will be inside ~/.mozilla/firefox/your_folder_name
+  - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
+  - If You want to save the report as txt after finishing set savetxt to True
    
-   - Create '.env' file using .env.Example and add "profile_Path" with the path of your Firefox profile
-     
-     - If in Linux it will be inside ~/.mozilla/firefox/your_folder_name
-     - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
-     - If You want to save the report as txt after finishing set savetxt to True
+6. Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
+  
+    | line_name | Line_number | Password |
+    | --------- | ----------- | -------- |
+    | line 1    | 2123456     | Password |
+    | line 2    | 1234567     | password |
    
-   - Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
-     
-     | line_name | Line_number | Password |
-     | --------- | ----------- | -------- |
-     | line 1    | 2123456     | Password |
-     | line 2    | 1234567     | password |
-   
-   - Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to,
-   **MUST INCLUDE COUNTRY CODE**
-      | Numbers       |
-      | ------------- |
-      | +201234567890 |
-      | +201198765432 |
-      | +201512345678 |
+7. Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to,
+**MUST INCLUDE COUNTRY CODE**
+    | Numbers       |
+    | ------------- |
+    | +201234567890 |
+    | +201198765432 |
+    | +201512345678 |
 
 *Note : Make sure you logged in with whatsapp web before running the script
 
-6. run the script by ```python3 ./qouta.py```
+8. run the script by ```python3 ./qouta.py```
