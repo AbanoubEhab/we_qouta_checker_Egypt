@@ -8,7 +8,7 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
 
 - Python 3
 - pip (usually comes with Python by default)
-- git (Opional)
+- git (Optional)
 - firefox browser (you can use any browser if you install it's selenium web driver but firefox just works [webdriver](https://www.selenium.dev/documentation/webdriver/))
   
 ### Installtion
@@ -20,12 +20,13 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
 
 4. Install required libraries ```pip install -r requirements.txt```
 
-5. open qouta.py 
+5. Adding Your Data and configs
    
    - Create '.env' file using .env.Example and add "profile_Path" with the path of your Firefox profile
      
-     - if in Linux it will be inside ~/.mozilla/firefox/your_folder_name
-     - if in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
+     - If in Linux it will be inside ~/.mozilla/firefox/your_folder_name
+     - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
+     - If You want to save the report as txt after finishing set savetxt to True
    
    - Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
      

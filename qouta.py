@@ -13,6 +13,9 @@ import random, os, csv
 load_dotenv('.env')
 
 profile_path: str = os.getenv('profile_path')
+savetxt = os.getenv('savetxt')
+
+print(savetxt)
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')
@@ -145,10 +148,11 @@ for num in nums:
             print("try recover")
 
 #Save Report as txt File
-new_var = date.today()
-file = open(str(new_var)+ " Qouta" + ".txt", 'w') 
-file.write(report) 
-file.close() 
+if savetxt == "True":
+    new_var = date.today()
+    file = open(str(new_var)+ " Qouta" + ".txt", 'w') 
+    file.write(report) 
+    file.close() 
 
 #reformat the report to be added to whatsapp link
 creport = quote(report)
