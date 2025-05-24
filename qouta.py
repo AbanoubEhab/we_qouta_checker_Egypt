@@ -66,10 +66,7 @@ def sendwhatsapp(phone):
 
 read_csv("Numbers.csv",nums)
 read_csv("Whatsapp.csv",ITTeam)
-
-# Print the filled arrays
-print(nums)
-print(ITTeam)
+random.shuffle(ITTeam)
 
 for num in nums:
 
@@ -95,16 +92,23 @@ for num in nums:
         try:
             #Check if qouta is empty
             sleep(2)
+            #IsPromo = WebDriverWait(driver, 7.5).until(
+            #EC.presence_of_element_located((By.XPATH, "//div[@class='ant-modal-body']"))
+            #)
             IsEmpty = WebDriverWait(driver, 7.5).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@class='ant-modal-body']"))
+            EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/div"))
             )
-
-            driver.get("https://my.te.eg/user/login")
-            sleep(2)
-            #Logout
-            logoutfun()
-            print("\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------")
-            report = report + "\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------"
+            sleep(1)
+            if IsEmpty.text == "Please renew your package to resume the service or you can use Salefny service for 10 EGP to get 5 GB at your original speed valid for 48 hours till you renew your package":
+                driver.get("https://my.te.eg/user/login")
+                sleep(2)
+                #Logout
+                logoutfun()
+                print("\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------")
+                report = report + "\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------"
+            else:
+                # Just Promo popup
+                raise Exception("Intentional crash to continue read data")
 
 
         except:
@@ -143,6 +147,7 @@ for num in nums:
         print("Error in " + num[0] +" "+ num[1] + "\n-----------------------------------------")
         report = report + "\nError in " + num[0] +" "+ num[1] + "\n-----------------------------------------"
         try:
+            driver.get("https://my.te.eg/echannel/#/overview")
             logoutfun()
         except:
             print("try recover")
