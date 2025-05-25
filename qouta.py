@@ -15,8 +15,6 @@ load_dotenv('.env')
 profile_path: str = os.getenv('profile_path')
 savetxt = os.getenv('savetxt')
 
-print(savetxt)
-
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')
 firefox_options.add_argument(profile_path)
@@ -92,13 +90,10 @@ for num in nums:
         try:
             #Check if qouta is empty
             sleep(2)
-            #IsPromo = WebDriverWait(driver, 7.5).until(
-            #EC.presence_of_element_located((By.XPATH, "//div[@class='ant-modal-body']"))
-            #)
-            IsEmpty = WebDriverWait(driver, 7.5).until(
-            EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/div"))
+            IsEmpty = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "ant-modal-confirm-content"))
             )
-            sleep(1)
+            sleep(2)
             if IsEmpty.text == "Please renew your package to resume the service or you can use Salefny service for 10 EGP to get 5 GB at your original speed valid for 48 hours till you renew your package":
                 driver.get("https://my.te.eg/user/login")
                 sleep(2)
@@ -108,6 +103,7 @@ for num in nums:
                 report = report + "\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------"
             else:
                 # Just Promo popup
+                driver.get("https://my.te.eg/user/login")
                 raise Exception("Intentional crash to continue read data")
 
 
