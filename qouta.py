@@ -144,6 +144,7 @@ for num in nums:
         report = report + "\nError in " + num[0] +" "+ num[1] + "\n-----------------------------------------"
         try:
             driver.get("https://my.te.eg/echannel/#/overview")
+            sleep(3)
             logoutfun()
         except:
             print("try recover")
