@@ -99,8 +99,8 @@ for num in nums:
                 sleep(2)
                 #Logout
                 logoutfun()
-                print("\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------")
-                report = report + "\n" + num[0] +" "+ num[1] +" : Empty Qouta \n---------------------------------------"
+                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
+                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
             else:
                 # Just Promo popup
                 driver.get("https://my.te.eg/user/login")
@@ -114,6 +114,7 @@ for num in nums:
             )
 
             qoutaGB = qouta.text.split()[0]
+            qoutanum = float(qoutaGB)
             
             #if the number is mobile qouta shows in MB instaed of GB
             if num[1][:3] == "015":
@@ -121,8 +122,12 @@ for num in nums:
             else:
                 unit = " GB "
 
-            print(str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB+ unit )
-            report = report + "\n" + str(num[0]) +" "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit
+            if qoutanum < 20:
+                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit )
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
+            else:
+                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit )
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit
 
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
@@ -140,8 +145,8 @@ for num in nums:
             
     except:
         #skipping if Error happens
-        print("Error in " + num[0] +" "+ num[1] + "\n-----------------------------------------")
-        report = report + "\nError in " + num[0] +" "+ num[1] + "\n-----------------------------------------"
+        print("Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------")
+        report = report + "\nError in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
         try:
             driver.get("https://my.te.eg/echannel/#/overview")
             sleep(3)
