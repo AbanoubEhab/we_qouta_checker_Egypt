@@ -122,7 +122,7 @@ for num in nums:
             else:
                 unit = " GB "
 
-            if qoutanum < 20:
+            if qoutanum < 30:
                 print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit )
                 report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
             else:
