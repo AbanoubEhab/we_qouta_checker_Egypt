@@ -79,7 +79,8 @@ for num in nums:
         numbox.send_keys(num[1]) 
         sleep(0.5)
         numbox.send_keys(Keys.TAB,Keys.ARROW_DOWN,Keys.RETURN)
-
+        sleep(0.5)
+        numbox.send_keys(Keys.RETURN)
         #Enter password
         passbox = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "login_password_input_01"))
@@ -104,6 +105,7 @@ for num in nums:
             else:
                 # Just Promo popup
                 driver.get("https://my.te.eg/user/login")
+                sleep(2)
                 raise Exception("Intentional crash to continue read data")
 
 
