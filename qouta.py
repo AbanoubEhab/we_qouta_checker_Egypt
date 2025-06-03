@@ -114,7 +114,6 @@ for num in nums:
             qouta = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[2]/div[3]/div/div/div[1]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div[1]/span[1]"))
             )
-
             qoutaGB = qouta.text.split()[0]
             qoutanum = float(qoutaGB)
             
@@ -146,15 +145,29 @@ for num in nums:
             logoutfun()
             
     except:
-        #skipping if Error happens
-        print("Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------")
-        report = report + "\nError in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
         try:
-            driver.get("https://my.te.eg/echannel/#/overview")
-            sleep(3)
-            logoutfun()
+
+            IsEmptyMob = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, "//*[@style='font-size: var(--ec-title-h6); color: rgb(49, 49, 49); font-weight: 700; margin-left: 20px; height: 8rem; margin-top: 20px;']"))
+                )
+            if IsEmptyMob.text == "No usage data available":
+                logoutfun()
+                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
+                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+            else:
+                raise Exception("Intentional crash to continue read data")
+
+
         except:
-            print("try recover")
+            #skipping if Error happens
+            print("Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------")
+            report = report + "\nError in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
+            try:
+                driver.get("https://my.te.eg/echannel/#/overview")
+                sleep(3)
+                logoutfun()
+            except:
+                print("try recover")
 
 #Save Report as txt File
 if savetxt == "True":
