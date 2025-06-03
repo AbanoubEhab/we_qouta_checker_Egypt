@@ -77,10 +77,8 @@ for num in nums:
         )
         numbox.clear()
         numbox.send_keys(num[1]) 
-        sleep(0.5)
+        sleep(1)
         numbox.send_keys(Keys.TAB,Keys.ARROW_DOWN,Keys.RETURN)
-        sleep(0.5)
-        numbox.send_keys(Keys.RETURN)
         #Enter password
         passbox = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "login_password_input_01"))
