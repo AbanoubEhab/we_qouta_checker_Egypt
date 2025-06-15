@@ -22,6 +22,7 @@ firefox_options.add_argument(profile_path)
 driver = webdriver.Firefox(options=firefox_options)
 
 report = ""
+actreport = ""
 keyboard = Controller()
 #Creating Arrays to hold the data from CSVs
 nums = []
@@ -53,8 +54,8 @@ def logoutfun():
     logout.click()
 
 #send whatsapp function
-def sendwhatsapp(phone):
-    driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ creport )
+def sendwhatsapp(phone,message):
+    driver.get("https://web.whatsapp.com/send?phone=" + phone + "&text="+ message )
     sleep(14 + round(random.uniform(0.2, 3), 2))
     send = WebDriverWait(driver, 7.5).until(
        EC.presence_of_element_located((By.XPATH, "/html/body"))
@@ -100,6 +101,10 @@ for num in nums:
                 logoutfun()
                 print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
                 report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+
+                if num[3] == "0":
+                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+
             else:
                 # Just Promo popup
                 driver.get("https://my.te.eg/user/login")
@@ -124,6 +129,9 @@ for num in nums:
             if qoutanum < 30:
                 print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit )
                 report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
+
+                if num[3] =="0":
+                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
             else:
                 print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit )
                 report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit
@@ -137,11 +145,14 @@ for num in nums:
             )
 
             daynum = int(days.text.split()[3])
-            print (daynum)
 
             if daynum < 4:
                 report = report + "\n⚠️ " + days.text + "\n--------------------------------------------"
                 print("\n⚠️ " + days.text + "\n--------------------------------------------")
+
+                if num[3] =="0":
+                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + "\n⚠️ " + days.text + "\n--------------------------------------------"
+
             else:
                 report = report + days.text + "\n--------------------------------------------"
                 print(days.text + "\n--------------------------------------------")
@@ -160,6 +171,9 @@ for num in nums:
                 logoutfun()
                 print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
                 report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+
+                if num[3] =="0":
+                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
             else:
                 raise Exception("Intentional crash to continue read data")
 
@@ -184,12 +198,16 @@ if savetxt == "True":
 
 #reformat the report to be added to whatsapp link
 creport = quote(report)
+cactreport = quote(actreport)
 
 #send report on whatsapp
 driver.get("https://web.whatsapp.com")
 sleep(20)
 
 for mem in ITTeam:
-    sendwhatsapp(mem[0])
+    if mem[1]=="0":
+        sendwhatsapp(mem[0],creport)
+    elif cactreport != "":
+        sendwhatsapp(mem[0],cactreport)
 
 driver.quit()
