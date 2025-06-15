@@ -135,8 +135,16 @@ for num in nums:
             days = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[4]/div/span"))
             )
-            report = report + days.text + "\n--------------------------------------------"
-            print(days.text + "\n--------------------------------------------")
+
+            daynum = int(days.text.split()[3])
+            print (daynum)
+
+            if daynum < 4:
+                report = report + "\n⚠️ " + days.text + "\n--------------------------------------------"
+                print("\n⚠️ " + days.text + "\n--------------------------------------------")
+            else:
+                report = report + days.text + "\n--------------------------------------------"
+                print(days.text + "\n--------------------------------------------")
 
             #Logout
             sleep(1)
