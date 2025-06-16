@@ -33,8 +33,8 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
     | line 1    | 2123456     | Password | 0      |
     | line 2    | 1234567     | password | 1      |
    
-7. Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to, if actor is set to 1 the number will receive only the internet lines the need to be charged
-**MUST INCLUDE COUNTRY CODE**
+7. Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to (**MUST INCLUDE COUNTRY CODE**), if actor is set to 1 the number will receive only the internet lines the need to be charged.
+
     | Numbers       | actor |
     | ------------- | ----- |
     | +201234567890 | 0     |

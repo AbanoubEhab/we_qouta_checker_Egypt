@@ -14,6 +14,8 @@ load_dotenv('.env')
 
 profile_path: str = os.getenv('profile_path')
 savetxt = os.getenv('savetxt')
+Warning_days = int(os.getenv("Warning_days", 4))
+Warning_GB = int(os.getenv("Warning_GB", 30))
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')
@@ -118,7 +120,7 @@ for num in nums:
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[2]/div[3]/div/div/div[1]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div[1]/span[1]"))
             )
             qoutaGB = qouta.text.split()[0]
-            qoutanum = float(qoutaGB)
+            qoutanum = float(qoutaGB.replace(",", ""))
             
             #if the number is mobile qouta shows in MB instaed of GB
             if num[1][:3] == "015":
@@ -126,16 +128,14 @@ for num in nums:
             else:
                 unit = " GB "
 
-            if qoutanum < 30:
+            if qoutanum < Warning_GB:
                 print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit )
                 report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
 
-                if num[3] =="0":
-                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
             else:
                 print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit )
                 report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit
-
+            
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
 
@@ -146,13 +146,14 @@ for num in nums:
 
             daynum = int(days.text.split()[3])
 
-            if daynum < 4:
-                report = report + "\n⚠️ " + days.text + "\n--------------------------------------------"
-                print("\n⚠️ " + days.text + "\n--------------------------------------------")
-
-                if num[3] =="0":
+            if num[3] =="0":
+                if daynum < Warning_days or qoutanum < Warning_GB:
                     actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + "\n⚠️ " + days.text + "\n--------------------------------------------"
 
+            if daynum < Warning_days:
+                report = report + "\n⚠️ " + days.text + "\n--------------------------------------------"
+                print("\n⚠️ " + days.text + "\n--------------------------------------------")
+  
             else:
                 report = report + days.text + "\n--------------------------------------------"
                 print(days.text + "\n--------------------------------------------")
