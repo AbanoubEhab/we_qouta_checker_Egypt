@@ -26,20 +26,20 @@ a python code to check remaining qouta form your ISP (for we website in egypt) t
     - If in Windows will be C:\Users\<username>\AppData\Roaming\Mozilla\Firefox\Profiles\your_folder_name
     - If You want to save the report as txt after finishing set savetxt to True
    
-6. Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV
+6. Copy Numbers.Example.csv to Numbers.csv and replace the data with your data Using excel or any program that can edit CSV, if the ignore field set to 1 ,the script will not send the number to actor when quota is empty 
   
-    | line_name | Line_number | Password |
-    | --------- | ----------- | -------- |
-    | line 1    | 2123456     | Password |
-    | line 2    | 1234567     | password |
+    | line_name | Line_number | Password | ignore |
+    | --------- | ----------- | -------- | ------ |
+    | line 1    | 2123456     | Password | 0      |
+    | line 2    | 1234567     | password | 1      |
    
-7. Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to,
+7. Copy Whatsapp.Example.csv to Whatsapp.csv and fill the numbers you want the report to be sent to, if actor is set to 1 the number will receive only the internet lines the need to be charged
 **MUST INCLUDE COUNTRY CODE**
-    | Numbers       |
-    | ------------- |
-    | +201234567890 |
-    | +201198765432 |
-    | +201512345678 |
+    | Numbers       | actor |
+    | ------------- | ----- |
+    | +201234567890 | 0     |
+    | +201198765432 | 1     |
+    | +201512345678 | 0     |
 
 *Note : Make sure you logged in with whatsapp web before running the script
 
