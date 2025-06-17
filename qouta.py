@@ -122,6 +122,11 @@ for num in nums:
             qoutaGB = qouta.text.split()[0]
             qoutanum = float(qoutaGB.replace(",", ""))
             
+            balance = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[2]/div[2]/div/div/div/div/div[2]/div[1]"))
+            )
+            balance = float(balance.text)
+
             #if the number is mobile qouta shows in MB instaed of GB
             if num[1][:3] == "015":
                 unit = " MB "
@@ -144,10 +149,15 @@ for num in nums:
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[4]/div/span"))
             )
 
+            PlanCost = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[3]/div/span[2]/div/div[1]"))
+            )
+
+            PlanCost = float(PlanCost.text)
             daynum = int(days.text.split()[3])
 
-            if num[3] =="0":
-                if daynum < Warning_days or qoutanum < Warning_GB:
+            if daynum < Warning_days or qoutanum < Warning_GB:
+                if num[3] =="0" and balance < PlanCost:
                     actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + "\n⚠️ " + days.text + "\n--------------------------------------------"
 
             if daynum < Warning_days:
