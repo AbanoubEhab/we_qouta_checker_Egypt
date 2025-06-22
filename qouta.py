@@ -134,12 +134,12 @@ for num in nums:
                 unit = " GB "
 
             if qoutanum < Warning_GB:
-                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit )
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit
+                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP")
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance)+ " EGP"
 
             else:
-                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit )
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit
+                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP")
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP"
             
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
@@ -158,11 +158,11 @@ for num in nums:
 
             if daynum < Warning_days or qoutanum < Warning_GB:
                 if num[3] =="0" and balance < PlanCost:
-                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + "\n⚠️ " + days.text + "\n--------------------------------------------"
+                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
 
             if daynum < Warning_days:
-                report = report + "\n⚠️ " + days.text + "\n--------------------------------------------"
-                print("\n⚠️ " + days.text + "\n--------------------------------------------")
+                report = report  + ", Balance = " + str(balance) + + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
+                print(", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------")
   
             else:
                 report = report + days.text + "\n--------------------------------------------"
@@ -180,11 +180,10 @@ for num in nums:
                 )
             if IsEmptyMob.text == "No usage data available":
                 logoutfun()
-                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
-                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
-
+                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------")
+                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------"
                 if num[3] =="0":
-                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------"
             else:
                 raise Exception("Intentional crash to continue read data")
 
