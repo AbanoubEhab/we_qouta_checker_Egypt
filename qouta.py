@@ -134,12 +134,12 @@ for num in nums:
                 unit = " GB "
 
             if qoutanum < Warning_GB:
-                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP")
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance)+ " EGP"
+                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP ")
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance)+ " EGP\n"
 
             else:
-                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP")
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP"
+                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP ")
+                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n"
             
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
