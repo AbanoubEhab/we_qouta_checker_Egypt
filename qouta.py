@@ -161,7 +161,7 @@ for num in nums:
                     actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
 
             if daynum < Warning_days:
-                report = report  + ", Balance = " + str(balance) + + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
+                report = report  + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
                 print(", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------")
   
             else:
