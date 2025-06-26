@@ -26,6 +26,7 @@ driver = webdriver.Firefox(options=firefox_options)
 report = ""
 actreport = ""
 keyboard = Controller()
+Seprt = "\n--------------------------------------------"
 #Creating Arrays to hold the data from CSVs
 nums = []
 ITTeam = []
@@ -101,7 +102,7 @@ for num in nums:
                 sleep(2)
                 #Logout
                 logoutfun()
-                NowReport = "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+                NowReport = "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta " + Seprt
                 print(NowReport)
                 report = report + NowReport
 
@@ -135,12 +136,14 @@ for num in nums:
                 unit = " GB "
 
             if qoutanum < Warning_GB:
-                print(str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP ")
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance)+ " EGP\n"
+                NowReport = str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP "
+                print(NowReport)
+                report = report + "\n" + NowReport +"\n"
 
             else:
-                print(str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP ")
-                report = report + "\n" + str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n"
+                NowReport = str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP "
+                print(NowReport)
+                report = report + "\n" + NowReport +"\n"
             
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
@@ -149,25 +152,25 @@ for num in nums:
             days = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[4]/div/span"))
             )
-
+            #Reading the Cost of plan
             PlanCost = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@id='_bes_window']/main/div/div/div[3]/div[2]/div/div/div/div/div[3]/div/span[2]/div/div[1]"))
             )
 
             PlanCost = float(PlanCost.text)
             daynum = int(days.text.split()[3])
-
+            # Decide if it need to send to actor
             if daynum < Warning_days or qoutanum < Warning_GB:
                 if num[3] =="0" and balance < PlanCost:
-                    actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
+                    actreport = actreport + "\n" + NowReport +"\n⚠️ " + days.text + Seprt
 
             if daynum < Warning_days:
-                report = report  + days.text + "\n--------------------------------------------"
-                print( days.text + "\n--------------------------------------------")
+                report = report  + days.text + Seprt
+                print( days.text + Seprt)
   
             else:
-                report = report + days.text + "\n--------------------------------------------"
-                print(days.text + "\n--------------------------------------------")
+                report = report + days.text + Seprt
+                print(days.text + Seprt)
 
             #Logout
             sleep(1)
@@ -175,23 +178,24 @@ for num in nums:
             
     except:
         try:
-
+            #check if qouta Empty and the popup did not appear
             IsEmptyMob = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[@style='font-size: var(--ec-title-h6); color: rgb(49, 49, 49); font-weight: 700; margin-left: 20px; height: 8rem; margin-top: 20px;']"))
                 )
             if IsEmptyMob.text == "No usage data available":
                 logoutfun()
-                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------")
-                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------"
+                NowReport = "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP" + Seprt
+                print(NowReport)
+                report = report + NowReport
                 if num[3] =="0":
-                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta , Balance = " + str(balance) + " EGP\n--------------------------------------------"
+                    actreport = actreport + NowReport
             else:
                 raise Exception("Intentional crash to continue read data")
 
 
         except:
             #skipping if Error happens
-            NowReport = "Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
+            NowReport = "Error in " + num[0] +" "+ num[1] + Seprt
             print(NowReport)
             report = report + "\n"+ NowReport
             try:
