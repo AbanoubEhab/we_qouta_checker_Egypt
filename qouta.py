@@ -101,11 +101,12 @@ for num in nums:
                 sleep(2)
                 #Logout
                 logoutfun()
-                print("\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------")
-                report = report + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+                NowReport = "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+                print(NowReport)
+                report = report + NowReport
 
                 if num[3] == "0":
-                    actreport = actreport + "\n🚨 " + num[0] +" : "+ num[1] +" : Empty Qouta \n--------------------------------------------"
+                    actreport = actreport + NowReport
 
             else:
                 # Just Promo popup
@@ -161,8 +162,8 @@ for num in nums:
                     actreport = actreport + "\n" + str(num[0]) +" : "+ str(num[1]) +"\n Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
 
             if daynum < Warning_days:
-                report = report  + ", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------"
-                print(", Balance = " + str(balance) + " EGP\n⚠️ " + days.text + "\n--------------------------------------------")
+                report = report  + days.text + "\n--------------------------------------------"
+                print( days.text + "\n--------------------------------------------")
   
             else:
                 report = report + days.text + "\n--------------------------------------------"
@@ -190,8 +191,9 @@ for num in nums:
 
         except:
             #skipping if Error happens
-            print("Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------")
-            report = report + "\nError in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
+            NowReport = "Error in " + num[0] +" "+ num[1] + "\n--------------------------------------------"
+            print(NowReport)
+            report = report + "\n"+ NowReport
             try:
                 driver.get("https://my.te.eg/echannel/#/overview")
                 sleep(3)
