@@ -137,14 +137,13 @@ for num in nums:
 
             if qoutanum < Warning_GB:
                 NowReport = str(num[0]) +" : "+ str(num[1]) +"\n⚠️ Qouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP "
-                print(NowReport)
-                report = report + "\n" + NowReport +"\n"
 
             else:
                 NowReport = str(num[0]) +" : "+ str(num[1]) +"\nQouta = " + qoutaGB + unit + ", Balance = " + str(balance) + " EGP "
-                print(NowReport)
-                report = report + "\n" + NowReport +"\n"
-            
+
+            print(NowReport)
+            report = report + "\n" + NowReport +"\n"
+
             #Reading Renewal Date
             driver.get("https://my.te.eg/echannel/#/overview")
 
@@ -165,8 +164,8 @@ for num in nums:
                     actreport = actreport + "\n" + NowReport +"\n⚠️ " + days.text + Seprt
 
             if daynum < Warning_days:
-                report = report  + days.text + Seprt
-                print( days.text + Seprt)
+                report = report  +"\n⚠️ "+ days.text + Seprt
+                print("\n⚠️ "+ days.text + Seprt)
   
             else:
                 report = report + days.text + Seprt
