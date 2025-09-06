@@ -50,7 +50,7 @@ def logoutfun():
        EC.presence_of_element_located((By.XPATH, "//*[@id='firstHeader']/div/div/div[2]/div[3]/div/div/div[2]/div/span"))
     )
     dropdown.click()
-
+    sleep(0.5)
     logout = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//div[@style='background-color: initial; cursor: pointer; border: 3px solid transparent; height: 2.5rem; display: flex; align-items: center; justify-content: center;']"))
     )
