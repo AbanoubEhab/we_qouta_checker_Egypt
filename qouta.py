@@ -75,6 +75,7 @@ for num in nums:
     try:
         #login
         driver.get("https://my.te.eg/user/login")
+        sleep(0.5)
         #Enter phone number
         numbox = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.ID, "login_loginid_input_01"))
